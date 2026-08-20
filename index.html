@@ -70,9 +70,12 @@
     background: rgba(246,248,247,0.92);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 11px 26px;
     font-family: var(--mono); font-size: 13px;
+  }
+  .toolbar-inner {
+    max-width: 1060px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 24px;
   }
   .toolbar .filename { font-weight: 700; }
   .toolbar .filename .ext { color: var(--ink-faint); font-weight: 400; }
@@ -92,7 +95,7 @@
   .toolbar nav a { color: var(--ink-soft); text-decoration: none; }
   .toolbar nav a:hover, .toolbar nav a:focus-visible { color: var(--mpl-blue); }
   @media (max-width: 860px) {
-    .toolbar { flex-wrap: wrap; gap: 8px 14px; padding: 10px 16px; }
+    .toolbar-inner { flex-wrap: wrap; gap: 8px 14px; padding: 10px 16px; }
     .toolbar nav {
       order: 3; width: 100%; gap: 14px; font-size: 12px;
       overflow-x: auto; -webkit-overflow-scrolling: touch;
@@ -206,8 +209,8 @@
   .pop-close:hover { color: var(--mpl-blue); border-color: rgba(31,119,180,0.5); }
 
   /* image grids */
-  .cook-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 700px; }
-  @media (max-width: 560px) { .cook-photos { gap: 8px; } }
+  .cook-photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 920px; }
+  @media (max-width: 720px) { .cook-photos { grid-template-columns: repeat(2, 1fr); } }
   .cook-photos .tile, .photo-grid .tile {
     padding: 0; border: none; background: none; cursor: zoom-in;
     display: block; width: 100%; line-height: 0; border-radius: 6px;
@@ -445,7 +448,7 @@
   .caption-note { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); margin-top: 12px; }
   .wip-note {
     font-family: var(--mono); font-size: 12px; line-height: 1.7; color: var(--ink-faint);
-    margin-top: 26px; padding: 12px 0 0; max-width: 700px;
+    margin-top: 26px; padding: 12px 0 0; max-width: 920px;
     border-top: 1px dashed var(--border);
   }
   .wip-note span { color: var(--mpl-orange); }
@@ -494,6 +497,7 @@
 <body>
 
 <header class="toolbar">
+ <div class="toolbar-inner">
   <div class="filename">hrishita<span class="ext"> · portfolio</span></div>
   <nav aria-label="Sections">
     <a href="#career">career</a>
@@ -504,6 +508,7 @@
     <a href="#human">the loop</a>
   </nav>
   <div class="kernel"><span class="kernel-dot" id="kernelDot"></span><span id="kernelLabel">kernel: idle</span></div>
+ </div>
 </header>
 
 <!-- ============ Hero ============ -->
@@ -918,24 +923,24 @@
       <p class="caption-note" style="margin-top:0;">the digital scrapbook &mdash; full archive on <a href="https://vsco.co/hrishitabapuram/gallery" target="_blank" rel="noopener">vsco.co/hrishitabapuram</a></p>
       <div class="photo-grid" style="margin-top:12px;">
         <button class="tile" aria-haspopup="dialog"
-          data-title="[title 1]"
-          data-body="[one line &mdash; where it was, and what made you stop and take it.] <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
-          <img src="assets/photo-1.jpg" alt="Photograph 1" width="700" height="700" loading="lazy">
+          data-title="M&uuml;rren, before the village wakes up"
+          data-body="The Alps doing the thing where they look rendered rather than real. The cloud sat on the range all morning and never quite lifted. <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
+          <img src="assets/photo-1.jpg" alt="A Swiss alpine village below a snow-covered mountain range at dawn" width="900" height="900" loading="lazy">
         </button>
         <button class="tile" aria-haspopup="dialog"
-          data-title="[title 2]"
-          data-body="[one line &mdash; where it was, and what made you stop and take it.] <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
-          <img src="assets/photo-2.jpg" alt="Photograph 2" width="700" height="700" loading="lazy">
+          data-title="Paris, from the top of the Arc de Triomphe"
+          data-body="Twelve avenues all leaving from directly beneath you, and the Eiffel Tower off to the right being quietly unavoidable. <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
+          <img src="assets/photo-2.jpg" alt="View across the rooftops of Paris towards the Eiffel Tower at golden hour" width="900" height="900" loading="lazy">
         </button>
         <button class="tile" aria-haspopup="dialog"
-          data-title="[title 3]"
-          data-body="[one line &mdash; where it was, and what made you stop and take it.] <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
-          <img src="assets/photo-3.jpg" alt="Photograph 3" width="700" height="700" loading="lazy">
+          data-title="Rialto, in the last of the light"
+          data-body="The Grand Canal at rush hour &mdash; vaporetti, delivery boats, and one gondola charging a fortune for the privilege. <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
+          <img src="assets/photo-3.jpg" alt="The Rialto Bridge over the Grand Canal in Venice at sunset" width="900" height="900" loading="lazy">
         </button>
         <button class="tile" aria-haspopup="dialog"
-          data-title="[title 4]"
-          data-body="[one line &mdash; where it was, and what made you stop and take it.] <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
-          <img src="assets/photo-4.jpg" alt="Photograph 4" width="700" height="700" loading="lazy">
+          data-title="Livraria Lello, Porto"
+          data-body="A bookshop with a queue and an entry fee, which ought to be insufferable and somehow stops being the moment you look up. <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
+          <img src="assets/photo-4.jpg" alt="The carved wooden staircase and stained-glass ceiling of the Livraria Lello bookshop in Porto" width="900" height="900" loading="lazy">
         </button>
       </div>
 
