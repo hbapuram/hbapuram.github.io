@@ -187,12 +187,24 @@
   }
   .pop-backdrop.open .pop { transform: none; }
   .pop img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  .pop-face {
+    width: 168px; margin: 6px auto 2px; aspect-ratio: 2 / 3; border-radius: 6px;
+    background-size: cover; background-position: center;
+    display: flex; align-items: flex-end; padding: 14px 13px;
+    box-shadow: 0 14px 30px -16px rgba(26,33,41,0.55);
+  }
+  .pop-face[hidden] { display: none; }
   .pop figcaption {
     font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft);
     padding: 12px 4px 14px; line-height: 1.6;
   }
   .pop figcaption b { display: block; color: var(--ink); font-weight: 500; margin-bottom: 4px; }
   .pop figcaption .pop-note { font-family: var(--prose); font-size: 13.5px; line-height: 1.55; }
+  .pop figcaption .pop-context {
+    display: block; margin-top: 11px; padding-top: 11px;
+    border-top: 1px dashed var(--border);
+    font-size: 12.5px; color: var(--ink-faint); line-height: 1.55;
+  }
   .pop figcaption a {
     font-family: var(--mono); font-size: 11.5px; color: var(--mpl-blue);
     text-decoration: none; white-space: nowrap;
@@ -332,6 +344,8 @@
   .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 22px; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 920px; }
   .solo-row { display: grid; grid-template-columns: 1fr; gap: 18px; max-width: 920px; }
+  #shelfCard { max-width: 640px; margin: 0 auto; text-align: center; }
+  #shelfCard .card-title { text-align: center; }
   @media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
 
   .card-title { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); margin-bottom: 12px; }
@@ -382,38 +396,42 @@
   .proj:hover .repo { color: var(--mpl-blue); }
 
   /* ---------- Shelf (on the shelf card) ---------- */
-  .shelf-mini-row { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
-  .shelf-mini { position: relative; width: 92px; flex-shrink: 0; }
+  .shelf-mini-row { display: flex; align-items: flex-end; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .shelf-mini { position: relative; width: 108px; flex-shrink: 0; }
   .shelf-mini-face {
     aspect-ratio: 2 / 3; border-radius: 5px; background-size: cover; background-position: center;
-    display: flex; align-items: flex-end; padding: 8px; overflow: hidden; cursor: pointer;
+    display: flex; align-items: flex-end; padding: 11px 10px; overflow: hidden; cursor: default;
     box-shadow: 0 1px 0 rgba(26,33,41,0.04), 0 10px 22px -16px rgba(26,33,41,0.4);
     transition: transform 0.22s ease, box-shadow 0.22s ease;
   }
-  .shelf-mini:hover .shelf-mini-face { transform: translateY(-4px); box-shadow: 0 14px 28px -16px rgba(26,33,41,0.5); }
-  .shelf-mini-fallback { font-family: var(--mono); font-size: 9.5px; line-height: 1.3; color: rgba(255,255,255,0.95); }
-  .shelf-mini-tip {
-    position: absolute; left: 50%; bottom: calc(100% + 9px); transform: translateX(-50%) translateY(5px);
-    width: 172px; background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-    padding: 10px 11px; box-shadow: 0 10px 28px -12px rgba(26,33,41,0.4);
-    opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 5;
+  .shelf-mini { padding: 0; border: none; background: none; cursor: zoom-in; }
+  .shelf-mini:hover .shelf-mini-face, .shelf-mini:focus-visible .shelf-mini-face {
+    transform: translateY(-4px); box-shadow: 0 14px 28px -16px rgba(26,33,41,0.5);
   }
-  .shelf-mini:hover .shelf-mini-tip { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .shelf-mini-stars { font-family: var(--mono); font-size: 10.5px; color: var(--mpl-orange); margin-bottom: 5px; }
-  .shelf-mini-thought { font-family: var(--prose); font-size: 12px; line-height: 1.5; color: var(--ink-soft); }
-  .shelf-spine-mini {
-    flex-shrink: 0; width: 26px; aspect-ratio: 2 / 3; border-radius: 4px;
-    background: linear-gradient(180deg, var(--ink-soft), var(--ink));
-    display: flex; align-items: center; justify-content: center; text-decoration: none;
-    box-shadow: 0 1px 0 rgba(26,33,41,0.04), 0 10px 22px -16px rgba(26,33,41,0.4);
-    transition: transform 0.22s ease;
+  .shelf-mini:focus-visible { outline: 2px solid var(--mpl-orange); outline-offset: 4px; border-radius: 6px; }
+  .shelf-mini-fallback { color: #fff; }
+  .shelf-mini-fallback .fb-title {
+    font-family: var(--serif); font-weight: 600; font-size: 13px; line-height: 1.25;
+    letter-spacing: -0.01em; display: block;
   }
-  .shelf-spine-mini:hover { transform: translateY(-4px); }
-  .shelf-spine-mini-label {
-    writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); font-size: 8px;
-    letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); white-space: nowrap; padding: 6px 0;
+  .shelf-mini-fallback .fb-author {
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.72); display: block; margin-top: 5px;
   }
-  .shelf-note { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); margin-top: 12px; }
+  .shelf-mini-head { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); margin-bottom: 6px; line-height: 1.4; }
+  .shelf-mini-head b { color: var(--ink); font-weight: 500; }
+  .shelf-mini-thought { font-family: var(--prose); font-size: 13px; line-height: 1.5; color: var(--ink); }
+  .shelf-mini[role="button"] { cursor: pointer; }
+  .shelf-mini:focus-visible { outline: 2px solid var(--mpl-orange); outline-offset: 4px; border-radius: 6px; }
+  .pop .pop-context {
+    display: block; font-size: 13px; line-height: 1.55; color: var(--ink-faint);
+    margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border);
+  }
+  .shelf-intro {
+    font-family: var(--prose); font-size: 15px; line-height: 1.6; color: var(--ink-soft);
+    max-width: 52ch; margin: 10px auto 20px;
+  }
+  .shelf-note { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); margin-top: 16px; }
   .shelf-note a { color: var(--mpl-blue); text-decoration: none; }
   .shelf-note a:hover { text-decoration: underline; }
 
@@ -517,7 +535,7 @@
     <button class="avatar-btn" id="avatarBtn" aria-haspopup="dialog" aria-label="A closer look at the human"
             data-full="assets/portrait.jpg"
             data-title="Fig. 0 &mdash; the human, unaugmented"
-            data-body="Milan, in the one cafe that had a free table. Photographed mid-sentence, in between the coffee indulgence and admiring the sunlight through the ceiling in Galleria.">
+            data-body="Milan, in the one cafe that had a free table. Photographed mid-sentence, which is the only way anyone gets a picture of me smiling.">
       <img src="assets/avatar.jpg" alt="Hrishita Bapuram" width="480" height="480">
     </button>
     <h1><span id="heroText">Hello, I'm Hrishita.</span><span class="cursor" aria-hidden="true"></span></h1>
@@ -885,13 +903,15 @@
   <!-- Human in the loop -->
   <section class="section" id="human" data-node="human">
     <div class="section-head"><span class="run-chip">run [<span class="exec-n">&nbsp;</span>]</span><h2>Human in the loop</h2></div>
-    <p class="lede">The part of the pipeline that doesn&rsquo;t optimise for anything &mdash; cooking, photographs, tennis (below amateur, proudly) and respawning unlimited times in video games. No leaderboard for any of it. That&rsquo;s the point.</p>
+    <p class="lede">The part of the pipeline that doesn&rsquo;t optimise for anything &mdash; books, cooking, photographs, tennis (below amateur, proudly) and an unreasonable number of hours in video games. No leaderboard for any of it. That&rsquo;s the point.</p>
     <div class="section-body">
       <div class="solo-row">
-        <div class="card" hidden id="shelfCard">
+        <div class="card" id="shelfCard">
           <div class="card-title">on the shelf</div>
+          
+          <p class="shelf-intro">If I had to keep one hobby, it&rsquo;s this one. Lifelong Agatha Christie devotee, unrepentant Potterhead, and a sucker for a puzzle &mdash; the kind with a solution at the end, and the kind without.</p>
           <div class="shelf-mini-row" id="shelfMiniRow"></div>
-          <p class="shelf-note">hover a cover for rating + note &middot; full library on <a href="https://hardcover.app" target="_blank" rel="noopener">hardcover &#8599;</a></p>
+          <p class="shelf-note">click a cover for the note &middot; no ratings &mdash; I&rsquo;ve never found a number that says anything useful about a book</p>
         </div>
       </div>
 
@@ -966,6 +986,7 @@
   <figure class="pop">
     <button class="pop-close" id="popClose" aria-label="Close">&times;</button>
     <img id="popImg" src="assets/portrait.jpg" alt="" width="760" height="760">
+    <div class="pop-face" id="popFace" hidden></div>
     <figcaption id="popCap"><b id="popTitle">Fig. 0</b><span class="pop-note" id="popNote">The human, unaugmented.</span></figcaption>
   </figure>
 </div>
@@ -987,7 +1008,7 @@
     { id: "ai",        label: "ML & AI",      sub: "genai · in production",    rx: 0.32, ry: 0.74, r: 15 },
     { id: "keepingup", label: "keeping up",   sub: "arc · tara",               rx: 0.82, ry: 0.24, r: 15 },
     { id: "book",      label: "dotted lines", sub: "author",                   rx: 0.86, ry: 0.60, r: 15 },
-    { id: "human",     label: "in the loop",  sub: "photos · cooking · games", rx: 0.62, ry: 0.80, r: 15 }
+    { id: "human",     label: "in the loop",  sub: "books · photos · cooking", rx: 0.62, ry: 0.80, r: 15 }
   ];
   var EDGES = [
     ["me","career"],["me","ai"],["me","keepingup"],["me","book"],["me","human"],
@@ -1215,35 +1236,62 @@
 
   /* ---------- Shelf ---------- */
   // Swap coverUrl / rating / thought / link with real values from your
-  // Hardcover account (its API returns an image_url per book).
-  var HARDCOVER_PROFILE = "https://hardcover.app";
+  // Covers come from Open Library by ISBN; if one is missing the tile falls
+  // back to a coloured card with the title, which is a deliberate look.
+  // No Hardcover link for now — add a profile URL here and re-link the tiles
+  // if you ever want the shelf to point at a full library.
   var SHELF = [
-    { title: "Piranesi", coverUrl: "https://covers.openlibrary.org/b/isbn/9781635575637-L.jpg", fallback: "#8C6A4F", rating: 5, thought: "The kind of book that makes your own house feel stranger afterward." },
-    { title: "The Employees", coverUrl: "https://covers.openlibrary.org/b/isbn/9780811230033-L.jpg", fallback: "#4F5D75", rating: 4, thought: "Cold and tender at once. Read it in one sitting on a delayed flight." },
-    { title: "Klara and the Sun", coverUrl: "https://covers.openlibrary.org/b/isbn/9780571364879-L.jpg", fallback: "#B5622F", rating: 4, thought: "Devastating in the way only Ishiguro manages without raising his voice." }
+    {
+      title: "Yesteryear", author: "Caro Claire Burke", isbn: "9780008742768", fallback: "#7C4B3A",
+      thought: "Such an engaging hook, and unexpectedly funny. I picked it up for the premise and stayed for how sharp it turned out to be underneath the jokes.",
+      context: "A tradwife influencer wakes up in the brutal reality of 1855. A debut, a #1 New York Times bestseller, and already being adapted with Anne Hathaway attached."
+    },
+    {
+      title: "Yellowface", author: "R. F. Kuang", isbn: "9780008532772", fallback: "#C9A227",
+      thought: "One of my favourite books of all time. Couldn&rsquo;t put it down &mdash; I love everything about it, right down to how uncomfortable it&rsquo;s willing to make you. The kind of book I&rsquo;ve pressed on people who didn&rsquo;t ask.",
+      context: "A struggling white author steals her dead friend&rsquo;s manuscript and passes it off as her own. Kuang&rsquo;s satire of publishing became one of the most argued-over novels of its year."
+    },
+    {
+      title: "Humankind", author: "Rutger Bregman", isbn: "9781408898956", fallback: "#3E7C59",
+      thought: "A much-needed dose of optimism for a difficult year. It never asks you to be naive about people, which is exactly why the argument lands.",
+      context: "Bregman&rsquo;s case that people are decent by default, re-examining the evidence behind Lord of the Flies, the Stanford prison experiment and the Blitz."
+    },
+    {
+      title: "The Seven Husbands of Evelyn Hugo", author: "Taylor Jenkins Reid", isbn: "9781501161933", fallback: "#7A2E3B",
+      thought: "Such beautiful storytelling. It leaves you feeling like you know her &mdash; and then quietly reminds you that being believed was always the trick she was best at.",
+      context: "An ageing film star finally tells the truth about her seven marriages, to a journalist who has no idea why she was chosen. A word-of-mouth phenomenon years after it was published."
+    }
   ];
-  function shelfStars(n) { var s = ""; for (var i = 0; i < 5; i++) s += i < n ? "★" : "☆"; return s; }
   function renderShelfMini() {
     var row = document.getElementById("shelfMiniRow");
     var card = document.getElementById("shelfCard");
     if (!row || (card && card.hasAttribute("hidden"))) return;
     var html = "";
     SHELF.forEach(function (b) {
-      html += '<div class="shelf-mini">' +
-        '<div class="shelf-mini-tip"><div class="shelf-mini-stars">' + shelfStars(b.rating) + '</div>' +
-        '<div class="shelf-mini-thought">' + b.thought + '</div></div>' +
-        '<a href="' + HARDCOVER_PROFILE + '" target="_blank" rel="noopener">' +
-        '<div class="shelf-mini-face" style="background-color:' + b.fallback + '" data-cover="' + b.coverUrl + '">' +
-        '<div class="shelf-mini-fallback">' + b.title + '</div></div></a></div>';
+      var cover = "https://covers.openlibrary.org/b/isbn/" + b.isbn + "-L.jpg";
+      var popBody = b.thought + '<span class="pop-context">' + b.context + '</span>';
+      html += '<div class="shelf-mini" role="button" tabindex="0" aria-haspopup="dialog"' +
+        ' aria-label="' + b.title + ' by ' + b.author + '"' +
+        ' data-kind="book"' +
+        ' data-title="' + b.title + ' &middot; <b>' + b.author + '</b>"' +
+        ' data-body="' + popBody.replace(/"/g, "&quot;") + '">' +
+        '<div class="shelf-mini-face" style="background-color:' + b.fallback + '" data-cover="' + cover + '">' +
+        '<div class="shelf-mini-fallback">' +
+        '<span class="fb-title">' + b.title + '</span>' +
+        '<span class="fb-author">' + b.author + '</span>' +
+        '</div></div></div>';
     });
-    html += '<a class="shelf-spine-mini" href="' + HARDCOVER_PROFILE + '" target="_blank" rel="noopener">' +
-      '<span class="shelf-spine-mini-label">rest →</span></a>';
     row.innerHTML = html;
     row.querySelectorAll(".shelf-mini-face").forEach(function (el) {
       var url = el.getAttribute("data-cover");
       if (!url) return;
       var img = new Image();
-      img.onload = function () { el.style.backgroundImage = 'url("' + url + '")'; el.querySelector(".shelf-mini-fallback").style.display = "none"; };
+      img.onload = function () {
+        if (img.naturalWidth < 20) return;   // Open Library returns a 1px pixel for misses
+        el.style.backgroundImage = 'url("' + url + '")';
+        el.querySelector(".shelf-mini-fallback").style.display = "none";
+
+      };
       img.onerror = function () {};
       img.src = url;
     });
@@ -1261,11 +1309,28 @@
 
     var last = null;
 
+    var face = document.getElementById("popFace");
+
     function open(trigger) {
-      var inner = trigger.querySelector("img");
-      var full = trigger.getAttribute("data-full") || (inner && inner.getAttribute("src"));
-      img.setAttribute("src", full || "");
-      img.setAttribute("alt", (inner && inner.getAttribute("alt")) || "");
+      if (trigger.getAttribute("data-kind") === "book") {
+        // Show the same cover the tile is showing — real artwork if it loaded,
+        // the typeset fallback if it didn't. Never a broken image.
+        var tile = trigger.querySelector(".shelf-mini-face");
+        img.hidden = true;
+        if (face && tile) {
+          face.hidden = false;
+          face.style.backgroundColor = tile.style.backgroundColor;
+          face.style.backgroundImage = tile.style.backgroundImage;
+          face.innerHTML = tile.style.backgroundImage ? "" : tile.innerHTML;
+        }
+      } else {
+        img.hidden = false;
+        if (face) face.hidden = true;
+        var inner = trigger.querySelector("img");
+        var full = trigger.getAttribute("data-full") || (inner && inner.getAttribute("src"));
+        img.setAttribute("src", full || "");
+        img.setAttribute("alt", (inner && inner.getAttribute("alt")) || "");
+      }
       if (title) title.innerHTML = trigger.getAttribute("data-title") || "";
       if (body) body.innerHTML = trigger.getAttribute("data-body") || "";
       last = trigger;
@@ -1278,8 +1343,13 @@
       if (last) last.focus();
     }
 
-    document.querySelectorAll("#avatarBtn, .tile").forEach(function (t) {
+    document.querySelectorAll("#avatarBtn, .tile, .shelf-mini").forEach(function (t) {
       t.addEventListener("click", function () { open(t); });
+      if (t.getAttribute("role") === "button") {
+        t.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(t); }
+        });
+      }
     });
 
     close.addEventListener("click", shut);
