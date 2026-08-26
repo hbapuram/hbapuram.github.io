@@ -1,0 +1,55 @@
+{
+  "_comment": "Source of truth for the bookshelf. Add a book by appending an object. cover: filename in assets/books/, or omit to fall back to Open Library by ISBN, then to a typeset card. height: 0.88-1.06, purely visual so the shelf looks like real books. Order here is the order on the shelf.",
+  "books": [
+    {
+      "title": "Yesteryear",
+      "author": "Caro Claire Burke",
+      "isbn": "9780008742768",
+      "cover": "",
+      "spine": "#8A5A46",
+      "height": 1.0,
+      "thought": "Such an engaging hook, and unexpectedly funny. I picked it up for the premise and stayed for how sharp it turned out to be underneath the jokes.",
+      "context": "A tradwife influencer wakes up in the brutal reality of 1855. A debut, a #1 New York Times bestseller, and already being adapted with Anne Hathaway attached."
+    },
+    {
+      "title": "Yellowface",
+      "author": "R. F. Kuang",
+      "isbn": "9780008532772",
+      "cover": "",
+      "spine": "#C2A03C",
+      "height": 0.94,
+      "thought": "One of my favourite books of all time. Couldn't put it down, and I love everything about it, right down to how uncomfortable it's willing to make you. The kind of book I've pressed on people who didn't ask.",
+      "context": "A struggling white author steals her dead friend's manuscript and passes it off as her own. Kuang's satire of publishing became one of the most argued-over novels of its year."
+    },
+    {
+      "title": "Humankind",
+      "author": "Rutger Bregman",
+      "isbn": "9781408898956",
+      "cover": "",
+      "spine": "#4C7F63",
+      "height": 1.06,
+      "thought": "A much-needed dose of optimism for a difficult year. It never asks you to be naive about people, which is exactly why the argument lands.",
+      "context": "Bregman's case that people are decent by default, re-examining the evidence behind Lord of the Flies, the Stanford prison experiment and the Blitz."
+    },
+    {
+      "title": "The Seven Husbands of Evelyn Hugo",
+      "author": "Taylor Jenkins Reid",
+      "isbn": "9781501161933",
+      "cover": "",
+      "spine": "#8A4551",
+      "height": 0.9,
+      "thought": "Such beautiful storytelling. It leaves you feeling like you know her, then quietly reminds you that being believed was always the trick she was best at.",
+      "context": "An ageing film star finally tells the truth about her seven marriages, to a journalist who has no idea why she was chosen. A word-of-mouth phenomenon years after it was published."
+    },
+    {
+      "title": "Murdoku",
+      "author": "Manuel Garand",
+      "isbn": "9781454961796",
+      "cover": "",
+      "spine": "#3F4C63",
+      "height": 1.0,
+      "thought": "Super fun and super addictive. You just have to try it to know it.",
+      "context": "Eighty murder-mystery logic puzzles: sudoku grids turned into crime scenes, where you place the suspects to reveal the killer. A USA Today and Publishers Weekly bestseller, by a puzzle maker whose work has run in the Financial Times."
+    }
+  ]
+}
