@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /
+
+# Keep personal photographs out of image search. This stops well-behaved
+# crawlers indexing them; it does not restrict access — see CLAUDE.md.
+Disallow: /assets/
+Allow: /assets/og-card.png
+
 Sitemap: https://www.hrishitabapuram.com/sitemap.xml

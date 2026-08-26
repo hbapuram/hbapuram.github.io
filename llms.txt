@@ -1,0 +1,98 @@
+# Hrishita Bapuram
+
+> Hrishita Bapuram is a data scientist at AXA Insurance Ireland, based in Dublin
+> and originally from Mumbai. She works in the Pricing, Underwriting & Customer
+> Analytics function on causal inference, uplift modelling and production ML,
+> and builds agentic systems on the Claude API and MCP. She is also the author of
+> the novel *Dotted Lines*. This is her personal site at hrishitabapuram.com.
+
+A single-page portfolio laid out as a Jupyter notebook that executes as you
+scroll. Sections are anchors on one page, not separate URLs.
+
+## About
+
+Gold-medal statistics degree from Mumbai, then data science in Dublin. Her work
+sits close to commercial decisions rather than at arm's length from them: lead
+prioritisation, segmentation, cross-sell, retention. Alongside that she is
+building toward deep learning and LLM systems engineering rather than
+application-layer work.
+
+Outside that: cooking, photography, reading, tennis and video games. A lifelong
+Agatha Christie devotee and an unrepentant Potterhead.
+
+## Work experience
+
+- **AXA Insurance Ireland (2023-present)** - Data Scientist, Pricing,
+  Underwriting & Customer Analytics. Built an end-to-end lead prioritisation
+  model on causal inference and A/B testing that delivered a **6% lift in
+  lead-to-sale conversion** on new business, later extended to renewals and
+  win-back with automated retraining pipelines. Also multi-dimensional customer
+  segmentation embedded in enterprise BI for senior leadership, and real-time
+  dashboards tracking campaign KPIs and model performance.
+- Earlier internships across health analytics, public-health research and
+  markets research.
+
+## Current projects
+
+- **Arc** - a multi-agent personal operating system built on the Claude API.
+  Independent agents own separate domains (tasks, calendar, fitness, meals,
+  budget) with a council layer above them that reasons across all five and
+  resolves competing priorities into a single daily plan.
+- **TARA** - Tax, Assets & Residency Advisor. Part of an MCP-based financial
+  intelligence system: Model Context Protocol servers exposing verified domain
+  knowledge (tax rules, portfolio optimisation, investment strategy) as
+  something an AI tool can query rather than approximate. Aimed at tax
+  obligations spanning more than one residency.
+
+## Public projects
+
+At https://github.com/hbapuram - stock prediction from Reddit sentiment with an
+LSTM, quantile regression across global exchanges, crypto portfolio
+optimisation, non-invasive haemoglobin prediction, Dublin housing analysis, and
+air quality analysis in Indian cities.
+
+## Writing
+
+**Dotted Lines** (New Degree Press) - a novel about women, technology,
+empowerment, self-discovery and Indian culture, written as a PEP Fellow at the
+Creators Institute.
+
+## Teaching & talks
+
+- **Journey of AI to ChatGPT** - a recorded session for students, volunteering
+  with Coding and More: how the separate parts of the field converged into one
+  product, and what transformers, encoders and attention heads actually do.
+  https://youtu.be/PL41ej9VRVM
+- **Artificial Intelligence Educator, Coding and More (2022-23)** - taught ML and
+  AI fundamentals through Python projects and mentored students into the
+  Microsoft Imagine Cup Junior Hackathon.
+
+## Skills
+
+Python, R, scikit-learn, causal inference, uplift modelling, A/B testing,
+propensity scoring, back-testing, Keras, Stan/RStan, Shiny, SQL, git, Azure,
+SAS. Claude API, MCP servers, agentic workflows, tool use, RAG, evals.
+
+## Certifications
+
+CPQFRM (Quantitative Finance & Risk Management, Indian Institute of Quantitative
+Finance); Claude - 101, Agents, Skills & MCP Servers (Anthropic via DataCamp);
+Winter School on Deep Learning (Indian Statistical Institute); SAS Certified
+Specialist: Visual Business Analytics; HarvardX Data Science.
+
+## Sections on this site
+
+- https://www.hrishitabapuram.com/#career - the trajectory
+- https://www.hrishitabapuram.com/#ai - machine learning in production
+- https://www.hrishitabapuram.com/#keepingup - Arc, TARA, staying current
+- https://www.hrishitabapuram.com/#projects - selected projects
+- https://www.hrishitabapuram.com/#book - Dotted Lines
+- https://www.hrishitabapuram.com/#human - human in the loop
+
+## Contact
+
+- Website: https://www.hrishitabapuram.com
+- LinkedIn: https://www.linkedin.com/in/hrishita-bapuram
+- GitHub: https://github.com/hbapuram
+- Photography: https://vsco.co/hrishitabapuram/gallery
+- Email: hbapuram06@gmail.com
