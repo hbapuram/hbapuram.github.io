@@ -229,14 +229,14 @@
   /* image grids */
   .cook-photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 920px; }
   @media (max-width: 720px) { .cook-photos { grid-template-columns: repeat(2, 1fr); } }
-  .cook-photos .tile, .photo-grid .tile {
+  .cook-photos .tile, .photo-row .tile {
     padding: 0; border: none; background: none; cursor: zoom-in;
     display: block; width: 100%; line-height: 0; border-radius: 6px;
   }
-  .cook-photos .tile:focus-visible, .photo-grid .tile:focus-visible {
+  .cook-photos .tile:focus-visible, .photo-row .tile:focus-visible {
     outline: 2px solid var(--mpl-orange); outline-offset: 3px;
   }
-  .cook-photos .tile img, .photo-grid .tile img {
+  .cook-photos .tile img, .photo-row .tile img {
     width: 100%; height: auto; display: block; aspect-ratio: 1; object-fit: cover;
     border-radius: 6px; border: 1px solid var(--border); background: var(--grid);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -548,8 +548,35 @@
   .btn.primary:hover { background: var(--mpl-blue); border-color: var(--mpl-blue); color: #fff; }
 
   /* ---------- Photos ---------- */
-  .photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 920px; }
-  @media (max-width: 720px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } }
+  /* A rail rather than a grid: four visible, the rest a slide away. Same
+     mechanism as the shelf, so it reuses .shelf-nav for the arrows. */
+  .photo-wrap { position: relative; width: 100%; max-width: 920px; margin-top: 12px; }
+  .photo-row {
+    display: flex; gap: 12px; flex-wrap: nowrap;
+    overflow-x: auto; scroll-snap-type: x proximity; scroll-behavior: smooth;
+    padding: 2px 2px 6px;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .photo-row::-webkit-scrollbar { display: none; }
+  .photo-row .tile { flex: 0 0 calc((100% - 3 * 12px) / 4); scroll-snap-align: start; }
+  @media (max-width: 720px) { .photo-row .tile { flex-basis: calc((100% - 12px) / 2.3); } }
+
+  /* Photobooth strip inside the lightbox */
+  .pop.strip-mode { width: min(300px, 88vw); }
+  .pop-strip {
+    width: min(200px, 24vh); margin: 6px auto 2px;
+    background: #FFFFFF; border-radius: 3px; padding: 9px 9px 0;
+    box-shadow: 0 18px 36px -20px rgba(26,33,41,0.65);
+  }
+  .pop-strip[hidden] { display: none; }
+  .pop-strip img {
+    width: 100%; aspect-ratio: 1; object-fit: cover; display: block;
+    border-radius: 1px; margin-bottom: 9px;
+  }
+  .pop figcaption .pop-note.when {
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint);
+    letter-spacing: 0.01em;
+  }
   details.facet { max-width: 760px; margin: 0 0 6px; }
   details.facet > summary {
     list-style: none; cursor: pointer; display: flex; align-items: baseline;
@@ -684,7 +711,7 @@
     <button class="avatar-btn" id="avatarBtn" aria-haspopup="dialog" aria-label="A closer look at the human"
             data-full="assets/portrait.jpg"
             data-title="Fig. 0: the human, unaugmented"
-            data-body="Milan, in the one cafe that had a free table. Photographed mid-sentence, in between the coffee indulgence and admiring the sunlight through the ceiling in Galleria.">
+            data-body="Milan, in the one cafe that had a free table. Photographed mid-sentence, which is the only way anyone gets a picture of me smiling.">
       <img src="assets/avatar.jpg" alt="Hrishita Bapuram" width="480" height="480">
     </button>
     <h1><span id="heroText">Hello, I'm Hrishita.</span><span class="cursor" aria-hidden="true"></span></h1>
@@ -1099,27 +1126,119 @@
 
       <div class="card-title" style="margin:30px 0 4px;">chronic, nostalgic, oversharer</div>
       <p class="caption-note" style="margin-top:0;">the digital scrapbook, full archive on <a href="https://vsco.co/hrishitabapuram/gallery" target="_blank" rel="noopener">vsco.co/hrishitabapuram</a></p>
-      <div class="photo-grid" style="margin-top:12px;">
-        <button class="tile" aria-haspopup="dialog"
-          data-title="M&uuml;rren, before the village wakes up"
-          data-body="The Alps doing the thing where they look rendered rather than real. The cloud sat on the range all morning and never quite lifted. <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
-          <img src="assets/photo-1.jpg" alt="A Swiss alpine village below a snow-covered mountain range at dawn" width="900" height="900" loading="lazy">
-        </button>
-        <button class="tile" aria-haspopup="dialog"
-          data-title="Paris, from the top of the Arc de Triomphe"
-          data-body="Twelve avenues all leaving from directly beneath you, and the Eiffel Tower off to the right being quietly unavoidable. <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
-          <img src="assets/photo-2.jpg" alt="View across the rooftops of Paris towards the Eiffel Tower at golden hour" width="900" height="900" loading="lazy">
-        </button>
-        <button class="tile" aria-haspopup="dialog"
-          data-title="Rialto, in the last of the light"
-          data-body="The Grand Canal at rush hour: vaporetti, delivery boats, and one gondola charging a fortune for the privilege. <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
-          <img src="assets/photo-3.jpg" alt="The Rialto Bridge over the Grand Canal in Venice at sunset" width="900" height="900" loading="lazy">
-        </button>
-        <button class="tile" aria-haspopup="dialog"
-          data-title="Livraria Lello, Porto"
-          data-body="A bookshop with a queue and an entry fee, which ought to be insufferable and somehow stops being the moment you look up. <a href=&quot;https://vsco.co/hrishitabapuram/gallery&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>more on VSCO &#8599;</a>">
-          <img src="assets/photo-4.jpg" alt="The carved wooden staircase and stained-glass ceiling of the Livraria Lello bookshop in Porto" width="900" height="900" loading="lazy">
-        </button>
+      <div class="photo-wrap">
+        <button class="shelf-nav prev" id="photoPrev" aria-label="Previous photographs" disabled>&#8249;</button>
+        <div class="photo-row" id="photoRow">
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Neuschwanstein Castle, Germany"
+            data-when="July 2026"
+            data-strip="assets/photos/photo-18a.jpg|assets/photos/photo-18b.jpg|assets/photos/photo-18c.jpg">
+            <img src="assets/photos/photo-18b.jpg" alt="Neuschwanstein Castle, Germany" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Innsbruck, Austria"
+            data-when="July 2026"
+            data-strip="assets/photos/photo-17a.jpg|assets/photos/photo-17b.jpg|assets/photos/photo-17c.jpg">
+            <img src="assets/photos/photo-17b.jpg" alt="Innsbruck, Austria" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Schilthorn, Switzerland"
+            data-when="July 2026"
+            data-strip="assets/photos/photo-16a.jpg|assets/photos/photo-16b.jpg|assets/photos/photo-16c.jpg">
+            <img src="assets/photos/photo-16b.jpg" alt="Schilthorn, Switzerland" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Interlaken + Lauterbrunnen, Switzerland"
+            data-when="July 2026"
+            data-strip="assets/photos/photo-15a.jpg|assets/photos/photo-15b.jpg|assets/photos/photo-15c.jpg">
+            <img src="assets/photos/photo-15b.jpg" alt="Interlaken, Switzerland" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Mürren, Switzerland"
+            data-when="July 2026"
+            data-strip="assets/photos/photo-14a.jpg|assets/photos/photo-14b.jpg|assets/photos/photo-14c.jpg">
+            <img src="assets/photos/photo-14b.jpg" alt="Mürren, Switzerland" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Mt. Pilatus, Switzerland"
+            data-when="July 2026"
+            data-strip="assets/photos/photo-13a.jpg|assets/photos/photo-13b.jpg|assets/photos/photo-13c.jpg">
+            <img src="assets/photos/photo-13b.jpg" alt="Mt. Pilatus, Switzerland" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Lucerne, Switzerland"
+            data-when="July 2026"
+            data-strip="assets/photos/photo-12a.jpg|assets/photos/photo-12b.jpg|assets/photos/photo-12c.jpg">
+            <img src="assets/photos/photo-12b.jpg" alt="Lucerne, Switzerland" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Paris, France"
+            data-when="July 2026"
+            data-strip="assets/photos/photo-11a.jpg|assets/photos/photo-11b.jpg|assets/photos/photo-11c.jpg">
+            <img src="assets/photos/photo-11b.jpg" alt="Paris, France" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Venice, Italy"
+            data-when="May 2026"
+            data-strip="assets/photos/photo-10a.jpg|assets/photos/photo-10b.jpg|assets/photos/photo-10c.jpg">
+            <img src="assets/photos/photo-10b.jpg" alt="Venice, Italy" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Lake Como, Italy"
+            data-when="May 2026"
+            data-strip="assets/photos/photo-9a.jpg|assets/photos/photo-9b.jpg|assets/photos/photo-9c.jpg">
+            <img src="assets/photos/photo-9b.jpg" alt="Lake Como, Italy" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Milan, Italy"
+            data-when="May 2026"
+            data-strip="assets/photos/photo-8a.jpg|assets/photos/photo-8b.jpg|assets/photos/photo-8c.jpg">
+            <img src="assets/photos/photo-8b.jpg" alt="Milan, Italy" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Porto, Portugal"
+            data-when="April 2026"
+            data-strip="assets/photos/photo-7a.jpg|assets/photos/photo-7b.jpg|assets/photos/photo-7c.jpg">
+            <img src="assets/photos/photo-7b.jpg" alt="Porto, Portugal" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Sintra + Cascais, Portugal"
+            data-when="April 2026"
+            data-strip="assets/photos/photo-6a.jpg|assets/photos/photo-6b.jpg|assets/photos/photo-6c.jpg">
+            <img src="assets/photos/photo-6b.jpg" alt="Sintra, Portugal" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Lisbon, Portugal"
+            data-when="April 2026"
+            data-strip="assets/photos/photo-5a.jpg|assets/photos/photo-5b.jpg|assets/photos/photo-5c.jpg">
+            <img src="assets/photos/photo-5b.jpg" alt="Lisbon, Portugal" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Brussels, Belgium"
+            data-when="March 2026"
+            data-strip="assets/photos/photo-4a.jpg|assets/photos/photo-4b.jpg|assets/photos/photo-4c.jpg">
+            <img src="assets/photos/photo-4b.jpg" alt="Brussels, Belgium" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Dinant, Belgium"
+            data-when="March 2026"
+            data-strip="assets/photos/photo-3a.jpg|assets/photos/photo-3b.jpg|assets/photos/photo-3c.jpg">
+            <img src="assets/photos/photo-3b.jpg" alt="Dinant, Belgium" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Bruges, Belgium"
+            data-when="March 2026"
+            data-strip="assets/photos/photo-2a.jpg|assets/photos/photo-2b.jpg|assets/photos/photo-2c.jpg">
+            <img src="assets/photos/photo-2b.jpg" alt="Bruges, Belgium" width="900" height="900" loading="lazy">
+          </button>
+          <button class="tile" aria-haspopup="dialog" data-kind="photo"
+            data-title="Amsterdam, The Netherlands"
+            data-when="March 2026"
+            data-strip="assets/photos/photo-1a.jpg|assets/photos/photo-1b.jpg|assets/photos/photo-1c.jpg">
+            <img src="assets/photos/photo-1b.jpg" alt="Amsterdam, The Netherlands" width="900" height="900" loading="lazy">
+          </button>
+        </div>
+        <button class="shelf-nav next" id="photoNext" aria-label="More photographs">&#8250;</button>
       </div>
 
       <p class="wip-note"><span>In&nbsp;[&infin;]:</span> hb.human.add_facet()&nbsp;still running. This section is permanently in development: there are more facets than fit here, and they arrive at the pace real life does.</p>
@@ -1155,6 +1274,7 @@
     <button class="pop-close" id="popClose" aria-label="Close">&times;</button>
     <img id="popImg" src="assets/portrait.jpg" alt="" width="760" height="760">
     <div class="pop-face" id="popFace" hidden></div>
+    <div class="pop-strip" id="popStrip" hidden></div>
     <figcaption id="popCap"><b id="popTitle">Fig. 0</b><span class="pop-note" id="popNote">The human, unaugmented.</span></figcaption>
   </figure>
 </div>
@@ -1490,6 +1610,25 @@
     .then(function (d) { renderShelfMini(d && d.books && d.books.length ? d.books : SHELF); })
     .catch(function () { renderShelfMini(SHELF); });
 
+  /* ---------- Photo rail ---------- */
+  (function () {
+    var row  = document.getElementById("photoRow");
+    var prev = document.getElementById("photoPrev");
+    var next = document.getElementById("photoNext");
+    if (!row || !prev || !next) return;
+    function page() { return row.clientWidth * 0.8; }
+    function sync() {
+      var max = row.scrollWidth - row.clientWidth - 2;
+      prev.disabled = row.scrollLeft <= 2;
+      next.disabled = row.scrollLeft >= max;
+    }
+    prev.onclick = function () { row.scrollBy({ left: -page(), behavior: "smooth" }); };
+    next.onclick = function () { row.scrollBy({ left: page(), behavior: "smooth" }); };
+    row.addEventListener("scroll", sync);
+    window.addEventListener("resize", sync);
+    sync();
+  })();
+
   /* ---------- Lightbox: hero avatar, food and photographs ---------- */
   (function () {
     var back  = document.getElementById("popBackdrop");
@@ -1501,13 +1640,43 @@
 
     var last = null;
 
-    var face = document.getElementById("popFace");
+    var face  = document.getElementById("popFace");
+    var strip = document.getElementById("popStrip");
+    var fig   = back.querySelector(".pop");
+
+    // Build the photobooth strip. Frames that 404 remove themselves, so a
+    // location with only one or two pictures still opens cleanly. With no
+    // data-strip at all, the tile's own picture stands in for all three.
+    function buildStrip(trigger) {
+      var inner = trigger.querySelector("img");
+      var list = (trigger.getAttribute("data-strip") || "").split("|").filter(Boolean);
+      if (!list.length && inner) {
+        var src = inner.getAttribute("src");
+        list = [src, src, src];
+      }
+      strip.innerHTML = "";
+      list.forEach(function (src, i) {
+        var im = document.createElement("img");
+        im.alt = i === 0 ? ((inner && inner.getAttribute("alt")) || "") : "";
+        im.onerror = function () { im.remove(); };
+        im.src = src;
+        strip.appendChild(im);
+      });
+    }
 
     function open(trigger) {
-      if (trigger.getAttribute("data-kind") === "book") {
+      var kind = trigger.getAttribute("data-kind");
+      fig.classList.toggle("strip-mode", kind === "photo");
+      if (kind === "photo") {
+        img.hidden = true;
+        if (face) face.hidden = true;
+        strip.hidden = false;
+        buildStrip(trigger);
+      } else if (kind === "book") {
         // Show the same cover the tile is showing: real artwork if it loaded,
         // the typeset fallback if it didn't. Never a broken image.
         var tile = trigger.querySelector(".shelf-mini-face");
+        strip.hidden = true;
         img.hidden = true;
         if (face && tile) {
           face.hidden = false;
@@ -1516,6 +1685,7 @@
           face.innerHTML = tile.style.backgroundImage ? "" : tile.innerHTML;
         }
       } else {
+        strip.hidden = true;
         img.hidden = false;
         if (face) face.hidden = true;
         var inner = trigger.querySelector("img");
@@ -1524,7 +1694,11 @@
         img.setAttribute("alt", (inner && inner.getAttribute("alt")) || "");
       }
       if (title) title.innerHTML = trigger.getAttribute("data-title") || "";
-      if (body) body.innerHTML = trigger.getAttribute("data-body") || "";
+      if (body) {
+        var when = trigger.getAttribute("data-when");
+        body.classList.toggle("when", !!when);
+        body.innerHTML = when || trigger.getAttribute("data-body") || "";
+      }
       last = trigger;
       back.classList.add("open");
       close.focus();
